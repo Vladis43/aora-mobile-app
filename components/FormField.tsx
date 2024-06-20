@@ -6,11 +6,12 @@ interface Props {
   title: string
   value: string
   onChangeText: (value: string) => void
+  placeholder?: string
   otherStyles?: string
   keyboardType?: KeyboardTypeOptions
 }
 
-const FormField = ({ title, value, onChangeText, keyboardType, otherStyles }: Props) => {
+const FormField = ({ title, value, onChangeText, placeholder, keyboardType, otherStyles }: Props) => {
   const [showPassword, setShowPassword] = useState(false)
 
   return (
@@ -22,10 +23,14 @@ const FormField = ({ title, value, onChangeText, keyboardType, otherStyles }: Pr
         <TextInput
           value={value}
           onChangeText={onChangeText}
+          placeholder={placeholder}
           keyboardType={keyboardType}
           placeholderTextColor="#7b7b8b"
-          className="text-base text-white font-psemibold flex-1"
           secureTextEntry={title === 'Password' && !showPassword}
+          autoCapitalize="none"
+          textContentType="none"
+          autoComplete="off"
+          className="text-base text-white font-psemibold flex-1"
         />
         {title === 'Password' && (
           <TouchableOpacity onPress={() => setShowPassword(state => !state)}>
